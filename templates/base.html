@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Photon by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<section id="header">
+				<div class="inner">
+					<span class="icon solid major fa-cloud"></span>
+					<h1>지번주소를 pnu코드로, <br>pnu코드를 지번주소로</h1>
+					<p>pnu란 전국의 약 4천만개에 달하는 지적을 유일하게 구분하는 값을 의미하며<br />
+					pnu값은 시도, 시구군, 읍면동, 리, 산구분, 본번, 부번으로 구성된 19자리의 코드입니다.</p>
+					<ul class="actions special">
+                        <li><a href="{% url 'conversion:jtop' %}" class="button scrolly">지번->pnu</a></li>
+                        <li><a href="{% url 'conversion:ptoj' %}" class="button scrolly">pnu->지번</a></li>
+					</ul>
+				</div>
+			</section>
+            {% block content %}
+            {% endblock %}
+
+		<!-- Footer -->
+			<section id="footer">
+				<ul class="icons">
+					<li><a href="https://github.com/khj6165/pnu_webapp" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon solid alt fa-envelope"></a><span class="label"> khj6165@gmail.com</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</section>
+
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'js/browser.min.js' %}"></script>
+			<script src="{% static 'js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+
+	</body>
+</html>

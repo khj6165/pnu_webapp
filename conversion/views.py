@@ -6,8 +6,10 @@ import re
 def jtop(request):
     return render(request, 'conversion/jtop.html')
 
+def ptoj(request):
+    return render(request, 'conversion/ptoj.html')
 
-def convert(request):
+def presult(request):
     if request.method =="POST":
         jibun = request.POST.get('jibun')
         parse_jibun = jibun.split()
@@ -58,4 +60,9 @@ def convert(request):
                     result = str(i['법정동코드'])
 
         result = result+jimok+num1+num2
-        return render(request, 'conversion/convert.html', {'pnu':result, 'jibun':jibun})
+        return render(request, 'conversion/presult.html', {'pnu':result, 'jibun':jibun})
+
+def jresult(request):
+    #if request.method =="POST":
+    #시도 2자리 11-서울, 26-부산, 27-대구, 28-인천, 29-광주, 30-대전, 31-울산, 36-세종, 41-경기, 42-강원, 43-충북, 44-충남, 45-전북, 46-전남, 47-경북, 48-경남, 50-제주   
+    return render(request, 'conversion/jresult.html')

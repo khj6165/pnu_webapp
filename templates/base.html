@@ -13,6 +13,7 @@
 
 		<!-- Header -->
 			<section id="header">
+                <a href="{% url 'main' %}">
 				<div class="inner">
 					<span class="icon solid major fa-cloud"></span>
 					<h1>지번주소를 pnu코드로, <br>pnu코드를 지번주소로</h1>
@@ -22,7 +23,7 @@
                         <li><a href="{% url 'conversion:jtop' %}" class="button scrolly">지번->pnu</a></li>
                         <li><a href="{% url 'conversion:ptoj' %}" class="button scrolly">pnu->지번</a></li>
 					</ul>
-				</div>
+				</div></a>
 			</section>
             {% block content %}
             {% endblock %}

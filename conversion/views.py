@@ -63,6 +63,31 @@ def presult(request):
         return render(request, 'conversion/presult.html', {'pnu':result, 'jibun':jibun})
 
 def jresult(request):
-    #if request.method =="POST":
-    #시도 2자리 11-서울, 26-부산, 27-대구, 28-인천, 29-광주, 30-대전, 31-울산, 36-세종, 41-경기, 42-강원, 43-충북, 44-충남, 45-전북, 46-전남, 47-경북, 48-경남, 50-제주   
-    return render(request, 'conversion/jresult.html')
+    if request.method =="POST":
+        #10자리 법정동코드/ 산여부 / 본번부번8자리
+        pnu = request.POST.get('pnu')
+        bcode = pnu[:10]
+        ccode = pnu[10:]
+
+        result = ""
+        #법정동코드
+        with open('bcode.json', "r", encoding="utf-8") as json_file:
+            json_data = json.load(json_file)
+            for i in json_data:
+                if str(i['법정동코드'])==bcode:
+                    result = i['시도명'] +' '+ i['시군구명'] + ' '+i['읍면동명'] + ' '+i['동리명']
+
+        #지목코드
+        if ccode[0] == '2':
+            result = result + '산'
+
+        num1 = ccode[1:5]
+        num2 = ccode[5:]
+        num1 = num1.lstrip("0")
+        if num2=="0000":
+            result = result + num1
+        else:
+            num2 = num2.lstrip("0")
+            result = result + num1 + '-' + num2
+
+    return render(request, 'conversion/jresult.html', {'pnu': pnu, 'jibun':result})

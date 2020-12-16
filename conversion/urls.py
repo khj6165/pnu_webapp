@@ -1,6 +1,8 @@
 from django.urls import path
-from . import views
+from .views import *
 
+app_name = 'conversion'
 urlpatterns = [
-    path('', views.main),
+    path('jtop/', jtop, name="jtop"),
+    path('convert/', convert, name="convert"),
 ]

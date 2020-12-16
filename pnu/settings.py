@@ -11,16 +11,17 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, json
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+CREDENTIAL_FILE = os.path.join(BASE_DIR, 'credentials.json')
+credentials = json.loads(open(CREDENTIAL_FILE).read())
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'um28@doc2zn-9d_^7=qau$hbodg34j$(o!)-k-j*1(r!f3lgq9'
+SECRET_KEY = credentials["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

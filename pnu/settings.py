@@ -12,16 +12,19 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os, json
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CREDENTIAL_FILE = os.path.join(BASE_DIR, 'credentials.json')
-credentials = json.loads(open(CREDENTIAL_FILE).read())
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = credentials["SECRET_KEY"]
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '[um28@doc2zn-9d_^7=qau$hbodg34j$(o!)-k-j*1(r!f3lgq9')
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
